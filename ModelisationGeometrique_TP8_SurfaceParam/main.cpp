@@ -37,20 +37,22 @@ float ty = 0.0f;
 const int CarreauLength = 3;
 const int CarreauListLength = 4;
 
-// Tableau des points de contrôles en global ...
-point3 TabPC[4] = { point3(-2., -2., -1.), point3(-1., 1., 0.), point3(1., 1., 1.), point3(2., -2., 2.) };
-point3 TabPC2[4] = { point3(-1.,- 1., 0.), point3(0., 1., 0.5), point3(2., 1., 0.), point3(1., -1., -1.) };
+// Ordre de la courbre  : Ordre
+// Degré de la courbe = Ordre - 1
+const int Ordre = 4;
+
+// Tableau des points de contrôles en global
+point3 TabPC[Ordre] = { point3(-2., -2., -1.), point3(-1., 1., 0.), point3(1., 1., 1.), point3(2., -2., 2.) };
+point3 TabPC2[Ordre] = { point3(-1.,- 1., 0.), point3(0., 1., 0.5), point3(2., 1., 0.), point3(1., -1., -1.) };
 
 // Points de controles du carreau paramétrique
 point3 P0[CarreauLength] = { point3(0., 0., 0.), point3(0., 1., 0.), point3(0., 2., 0.) };
 point3 P1[CarreauLength] = { point3(1., 0., 0.), point3(1., 1., 1.), point3(1., 2., 1.) };
 point3 P2[CarreauLength] = { point3(2., 0., 0.), point3(2., 1., 1.), point3(2., 2., 1.) };
 point3 P3[CarreauLength] = { point3(3., 0., 0.), point3(3., 1., 0.), point3(3., 2., 0.) };
-point3 *P[CarreauListLength] = { P0, P1, P2, P3 }; // P3, P2, P1, P0
+point3 *P[CarreauListLength] = { P0, P1, P2, P3 };
 
-// Ordre de la courbre  : Ordre
-// Degré de la courbe = Ordre - 1
-const int Ordre = 4;
+point3 TabPC_Gen[10] = { point3(-1.,-1., 0.), point3(0., 1., 0.5), point3(2., 1., 0.), point3(1., -1., -1.),  point3(3., 0., 0.), point3(3., 1., 0.), point3(3., 2., 0.), point3(2., 0., 0.), point3(2., 1., 1.), point3(2., 2., 1.) };
 
 // Point de controle selectionné
 int numPoint = 0;
@@ -105,7 +107,7 @@ point3 tensorielle(point3 **p, const float u, const float v, const int length, c
 
 void drawCasteljau(point3 * points, const int lg)
 {
-	glColor3f(0.f, 1.f, 0.f);
+	glColor3f(0.f, 0.f, 1.f);
 	glBegin(GL_LINE_STRIP);
 	point3 tmp;
 	for (float t = 0; t <= 1; t += 0.001)
@@ -118,6 +120,7 @@ void drawCasteljau(point3 * points, const int lg)
 
 void drawHermite(const point3 &p0, const point3 &p1, const point3 &v0, const point3 &v1)
 {
+	glColor3f(0.f, 1.f, 1.f);
 	glBegin(GL_LINE_STRIP);
 	for (float u = 0.f; u <= 1.f; u += 0.01f)
 	{
@@ -143,12 +146,11 @@ void drawBezier(point3 * tabPC, const unsigned int lg)
 	glEnd();
 }
 
-void drawCarreauParam(point3 *p0, point3 *p1, point3 *p2, point3 *p3)
+void drawCarreauParam(point3 **p)
 {
-	drawCasteljau(p0, CarreauLength);
-	drawCasteljau(p1, CarreauLength);
-	drawCasteljau(p2, CarreauLength);
-	drawCasteljau(p3, CarreauLength);
+	for (int i = 0; i < CarreauListLength; i++)
+		drawCasteljau(p[i], CarreauLength);
+	
 	float delta = 0.05f;
 
 	for (float u = 0.f; u < 1.f; u += delta)
@@ -176,8 +178,8 @@ void drawCarreauParam(point3 *p0, point3 *p1, point3 *p2, point3 *p3)
 void drawSurfaceReglee(point3 * tabPC1, point3 * tabPC2)
 {
 	drawBezier(tabPC1, Ordre);
-	drawBezier(tabPC2, Ordre);
-	glColor3f(0.f, 0.f, 1.f);
+	drawCasteljau(tabPC2, Ordre);
+	glColor3f(1.f, 0.f, 0.f);
 	glBegin(GL_LINE_STRIP);
 	for (float t = 0.f; t <= 1.f; t += 0.01f)
 	{
@@ -193,6 +195,45 @@ void drawSurfaceReglee(point3 * tabPC1, point3 * tabPC2)
 		glVertex3f(s2.x, s2.y, s2.z);
 	}
 	glEnd();
+}
+
+void drawSurfaceBalayee(point3 * tabpc, point3 *generatrice, const int directrice_length, const int generatrice_length, const float step, const float delta)
+{
+	drawBezier(tabpc, directrice_length);
+	drawCasteljau(generatrice, generatrice_length);
+	
+	for (float s = 0.f; s < 1.f; s += step) 
+	{
+		point3 p(getCasteljauPoint(tabpc, directrice_length - 1, 0, s));
+		point3 p2(getCasteljauPoint(tabpc, directrice_length - 1, 0, s + step));
+
+		for (float t = 0.f; t < 1.f; t += delta)
+		{
+			point3 acc(0.f, 0.f, 0.f);
+			point3 acc2(0.f, 0.f, 0.f);
+			point3 acc3(0.f, 0.f, 0.f);
+			point3 acc4(0.f, 0.f, 0.f);
+			for (int i = 0; i < generatrice_length; i++)
+			{
+				point3 p_gen(generatrice[i] * Bernstein(i, generatrice_length - 1, t));
+				acc = acc + point3(p + p_gen);
+				acc2 = acc2 + point3(p2 + p_gen);
+				acc3 = acc3 + p2 + generatrice[i] * Bernstein(i, generatrice_length - 1, t + delta);
+				acc4 = acc4 + p + generatrice[i] * Bernstein(i, generatrice_length - 1, t + delta);
+			}
+			
+			glBegin(GL_TRIANGLES);
+			glColor3f(1.f, 0.f, 0.f);
+			glVertex3f(acc.x, acc.y, acc.z);
+			glVertex3f(acc2.x, acc2.y, acc2.z);
+			glVertex3f(acc3.x, acc3.y, acc3.z);
+			glColor3f(0.f, 1.f, 0.f);
+			glVertex3f(acc4.x, acc4.y, acc4.z);
+			glVertex3f(acc.x, acc.y, acc.z);
+			glVertex3f(acc3.x, acc3.y, acc3.z);
+			glEnd();
+		}
+	}
 }
 
 void addContrainteBezier2C0(point3 *tabPC1, point3 *tabPC2, const int ordre1, const int ordre2)
@@ -269,7 +310,9 @@ void display(void)
 
 	//drawSurfaceReglee(TabPC, TabPC2);
 
-	drawCarreauParam(P0, P1, P2, P3);
+	//drawCarreauParam(P);
+
+	drawSurfaceBalayee(TabPC, TabPC_Gen, Ordre, 10, 0.05f, 0.05f);
 
 	//glEnd();
 	glFlush();
@@ -281,7 +324,7 @@ void reshape(int w, int h)
 	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	// glOrtho(-20, 20, -20, 20, -10, 10);
+	//glOrtho(-20, 20, -20, 20, -10, 10);
 	glOrtho(-5, 5, -5, 5, -10, 10);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
