@@ -1,0 +1,23 @@
+﻿  main.cpp
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(68): warning C4244: 'argument' : conversion de 'const int' en 'float', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(68): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(111): warning C4305: '+=' : troncation de 'double' à 'float'
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(114): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(125): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(137): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(141): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(166): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(167): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(168): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(169): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(192): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(193): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(215): warning C4244: 'argument' : conversion de 'double' en 'GLfloat', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(311): warning C4305: '=' : troncation de 'double' à 'float'
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(315): warning C4305: '=' : troncation de 'double' à 'float'
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(319): warning C4305: '=' : troncation de 'double' à 'float'
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(323): warning C4305: '=' : troncation de 'double' à 'float'
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(338): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+c:\users\joris\documents\github\modelisationgeometrique_tp8_surfaceparam\modelisationgeometrique_tp8_surfaceparam\main.cpp(339): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  ModelisationGeometrique_TP8_SurfaceParam.vcxproj -> C:\Users\joris\Documents\GitHub\ModelisationGeometrique_TP8_SurfaceParam\Debug\ModelisationGeometrique_TP8_SurfaceParam.exe
+  ModelisationGeometrique_TP8_SurfaceParam.vcxproj -> C:\Users\joris\Documents\GitHub\ModelisationGeometrique_TP8_SurfaceParam\Debug\ModelisationGeometrique_TP8_SurfaceParam.pdb (Partial PDB)
